@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\UserController;
 use App\Http\Controllers\BulkUploadController;
 
 /*
@@ -21,3 +22,5 @@ Route::get('/', function () {
 Route::get('upload',            [BulkUploadController::class, 'view'])->name('bulk.upload.view');
 Route::post('upload',           [BulkUploadController::class, 'upload'])->name('bulk.upload.store');
 Route::get('batch/{id}',        [BulkUploadController::class, 'batch'])->name('bulk.upload.progress-bar');
+
+Route::get('users',             [UserController::class, 'index'])->name('users');

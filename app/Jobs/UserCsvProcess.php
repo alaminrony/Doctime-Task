@@ -15,7 +15,7 @@ class UserCsvProcess implements ShouldQueue
     use Batchable,Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 
     public $data;
-    public $header;
+    // public $header;
 
     /**
      * Create a new job instance.
@@ -23,7 +23,7 @@ class UserCsvProcess implements ShouldQueue
     public function __construct($data, $header)
     {
         $this->data   = $data;
-        $this->header = $header;
+        // $this->header = $header;
     }
 
     /**
