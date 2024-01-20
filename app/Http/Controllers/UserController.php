@@ -2,31 +2,27 @@
 
 namespace App\Http\Controllers;
 
+
 use App\Models\User;
 use Illuminate\Http\Request;
+use App\Service\UserInterface;
 use Illuminate\Support\Facades\Redis;
 
 class UserController extends Controller
 {
 
+    protected $userInterface;
+
+    public function __construct(UserInterface $userInterface)
+    {
+        $this->userInterface = $userInterface;
+    }
+
     public function index(Request $request)
     {
         $startTime = microtime(true);
 
-        $pageNo = $request->page ??  '1';
-
-        $redisKey = "pagination:users:page_" . $pageNo;
-
-        $cachedData = Redis::get($redisKey);
-
-        if (!$cachedData) {
-            $users = User::paginate(20);
-
-            Redis::setex($redisKey, 60, serialize($users));
-        } else {
-            $users = unserialize($cachedData);
-        }
-
+        $users = $this->userInterface->getAllUserByPagination($request);
 
         $endTime = microtime(true);
         $executionTime = ($endTime - $startTime) * 1000;

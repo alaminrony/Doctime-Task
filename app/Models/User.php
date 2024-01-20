@@ -43,4 +43,16 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
+
+    public function scopeFilter($query, $request)
+    {
+        if (!empty($request->birth_year)) {
+            $query = $query->where('birth_year', $request->birth_year);
+        }
+        if (!empty($request->birth_month)) {
+            $query = $query->where('birth_month', $request->birth_month);
+        }
+
+        return $query;
+    }
 }

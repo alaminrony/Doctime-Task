@@ -13,18 +13,24 @@ return new class extends Migration
     {
         Schema::create('users', function (Blueprint $table) {
             $table->id();
-            $table->bigInteger('user_id')->unique();
+            // $table->bigInteger('user_id')->unique();
             $table->string('name');
             $table->string('email')->unique();
             $table->string('phone')->unique();
             $table->ipAddress('ip');
             $table->string('country');
-            $table->datetime('date_of_birth')->index();
+            $table->datetime('date_of_birth');
+            $table->integer('birth_year')->nullable();
+            $table->integer('birth_month')->nullable();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password')->nullable();
             $table->rememberToken();
             $table->timestamps();
             $table->softDeletes();
+
+            // Apply Indexing birth_year & birth_month for Faster Query Performance.
+            $table->index('birth_year');
+            $table->index('birth_month');
         });
     }
 

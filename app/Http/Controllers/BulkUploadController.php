@@ -50,6 +50,6 @@ class BulkUploadController extends Controller
     public function batch() {
         $batchId = request()->id;
         $batch = Bus::findBatch($batchId);
-        return view('batch-progress', compact('batch'));
+        return view('upload.batch-progress', compact('batch'));
     }
 }
