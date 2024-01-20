@@ -61,6 +61,37 @@ I Used Repository, Service Pattern with Interface Implementation. For caching I 
 
 
 
+# Thank You 🙏
+
+<div align="center">
+  <img src="https://placekitten.com/300/200" alt="Thank You Image">
+</div>
+
+---
+
+### About
+This is a simple "Thank You" message with a touch of design for your GitHub README.
+
+### Features
+- Clean and minimalistic design
+- Easy to customize
+
+### How to Use
+1. Fork the repository
+2. Clone the repository to your local machine
+3. Open the `README.md` file
+4. Customize the "Thank You" message or add more design elements
+5. Commit and push the changes
+6. Your README is now personalized!
+
+### Preview
+![Thank You Preview](https://placekitten.com/600/400)
+
+### License
+This project is licensed under the [MIT License](LICENSE).        
+
+
+
 
 
 
