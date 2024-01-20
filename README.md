@@ -50,8 +50,10 @@ I Used Repository, Service Pattern with Interface Implementation. For caching I 
  
         Here, I checked, If no page numner available in my url, then It would be 1. if user filter by birth_year then $redisKey concat this string.same as birth_month. And finally return Generated Key.
 
-- Step 2) After getting $redisKey, I have checked, data is available in Redis cache? If yes then unserialize this cache data. 
+- Step 2) After getting $redisKey, I have checked, data is available in Redis cache? If yes then unserialize this cache data & return view file. 
         If no then fetched data from database with pagination 20 data per page. serialize data & set Redis with 60 second expiry time.
+        I have already checked in Several times that the SQL Query do not take longer than 250ms. I have also Shown Executation time in view 
+        file used microtime().
     
         Ex Code: Redis::setex($redisKey, 60, serialize($users));
 
