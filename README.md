@@ -1,14 +1,36 @@
-## About Laravel
+## Create Migration File
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+- [Updated User Migration file](https://github.com/alaminrony/Doctime-Task/blob/master/database/migrations/2014_10_12_000000_create_users_table.php).
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+- For Faster Query Performance I Applied Indexing in column birth_year & birth_month.
+- $table->index('birth_year').
+- $table->index('birth_month').
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+## Bulk Import Data
+
+For uploading 100000 Data, I used Job Batching & Queue.
+
+
+- [Create Jobs & job_batches table for handle Job Batching](https://github.com/alaminrony/Doctime-Task/blob/master/database/migrations/2024_01_19_111017_create_job_batches_table.php).
+- [Logic wrtitten in BulkUploadController](https://github.com/alaminrony/Doctime-Task/blob/master/app/Http/Controllers/BulkUploadController.php).
+
+
+## Redis Configuraion
+
+- Installing Redis Server, predis, & Set REDIS_CLIENT=predis in config/databse.php. 
+- Update .env file Set CACHE_DRIVER=redis & SESSION_DRIVER=redis 
+- Now Redis Cache prepare to use in my system. 
+
+
+## User Data Fetching
+
+I Used Repository, Service Pattern with Interface Implementation. For caching I used Redis Cache.
+
+
+- Installing Redis Server, predis, & Set REDIS_CLIENT=predis in config/databse.php. 
+- Update .env file Set CACHE_DRIVER=redis & SESSION_DRIVER=redis 
+- Now Redis Cache prepare to use in my system.
+
+
+
 
