@@ -15,7 +15,7 @@ For uploading 100000 Data, I used Job Batching & Queue.
 - [Logic wrtitten in BulkUploadController](https://github.com/alaminrony/Doctime-Task/blob/master/app/Http/Controllers/BulkUploadController.php).
 - [Job Processed by UserCsvProcess](https://github.com/alaminrony/Doctime-Task/blob/master/app/Jobs/UserCsvProcess.php).
 
-## Redis Configuraion
+## Redis Configuration
 
 - Installing Redis Server, predis, & Set REDIS_CLIENT=predis in config/databse.php. 
 - Update .env file Set CACHE_DRIVER=redis & SESSION_DRIVER=redis 
