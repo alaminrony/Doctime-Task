@@ -35,11 +35,30 @@ I Used Repository, Service Pattern with Interface Implementation. For caching I 
 - Step 3) Inside the Service Folder, I created UserInterface,UserService class. I called UserInterface->getAllUserByPagination($request) method.
 - Step 4) This UserInterface Implemented by UserService class. 
 - Step 5) In UserService class,I injected UserRepositoryInterface in Constructor.
-- Step 6) In UserService class, This getAllUserByPagination() method call to $this->userRepositoryInterface->getAllUserByPagination($request).[UserService Link](https://github.com/alaminrony/Doctime-Task/blob/master/app/Service/UserService.php)
+- Step 6) In UserService class, This getAllUserByPagination() method call to $this->userRepositoryInterface->getAllUserByPagination($request).   [UserService Link](https://github.com/alaminrony/Doctime-Task/blob/master/app/Service/UserService.php)
 - Step 7) Inside the App/Repository folder UserRepository implements UserRepositoryInterface.
 - Step 8) In UserRepository class,I injected User model in Constructor.Finally we reached our main Logical Destination [UserRepository Link](https://github.com/alaminrony/Doctime-Task/blob/master/app/Repository/UserRepository.php)
 - Step 9) This UserRepository class, getAllUserByPagination() method return our Users data.
-- Step 10) For Binding all Interface & Classess. I create a RepositoryServiceProvider & register it config/app/providers array. Inside register method I have written my binding code.[RepositoryServiceProvider Link](https://github.com/alaminrony/Doctime-Task/blob/master/app/Providers/RepositoryServiceProvider.php) 
+- Step 10) For Binding all Interface & Classess. I create a RepositoryServiceProvider & register it config/app/providers array. 
+        Inside register  method I have written my binding code.[RepositoryServiceProvider Link](https://github.com/alaminrony/Doctime-Task/blob/master/app/Providers/RepositoryServiceProvider.php) 
+
+
+## How I Fetched Data & Used Redis Cache ?
+
+- Step 1) First of all, I generated a Redis key format using redisKeyGenerate() Method. 
+          Format is "pagination:users:page_{$pageNo}_{$birth_year}_{$birth_month}"
+ 
+        Here, I checked, If no page numner available in my url, then It would be 1. if user filter by birth_year then $redisKey concat this string.same as birth_month. And finally return Generated Key.
+
+- Step 2) After getting $redisKey, I have checked, data is available in Redis cache? If yes then unserialize this cache data. 
+        If no then fetched data from database with pagination 20 data per page. serialize data & set Redis with 60 second expiry time.
+    
+        Ex Code: Redis::setex($redisKey, 60, serialize($users));
+
+- Step 3) For filtering I used laravel scoping feature, which has defined User Model. 
+        this purpose, I create a scopeFilter() method. Inside this method, I checked, If Request birth_year is not empty. then add
+        where condition with the column of birth_year. same as birth_month. & return this Query Object.
+
 
 
 
